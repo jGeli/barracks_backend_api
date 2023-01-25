@@ -1,0 +1,23 @@
+{
+  "name": "mern-backend",
+  "version": "1.0.0",
+  "description": "bugtech-boilerplate",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon server.js"
+  },
+  "author": "Bugtech Solutions Provider",
+  "license": "MIT",
+  "type": "module",
+  "dependencies": {
+    "colors": "^1.4.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "moment-timezone": "^0.5.40",
+    "mongoose": "^6.8.4",
+    "morgan": "^1.10.0",
+    "nodemon": "^2.0.20"
+  }
+}
