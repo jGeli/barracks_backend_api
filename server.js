@@ -43,6 +43,10 @@ app.get("/", (req, res, next) => {
 });
 
 app.get("/api/v1/test", (req, res, next) => {
+    let num = 0x1aaa
+
+    console.log(num)
+    
     res.status(200).json({
         c: 200,
         m: "Hello World!",
