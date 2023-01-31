@@ -39,7 +39,7 @@ export const createUser = asyncHandler(async (req, res, next) => {
     password: hashedPassword,
     firstName: String(firstName),
     lastName: String(lastName),
-    phone,
+    phone: String(phone),
     role: "user",
   }).catch((err) => {
     console.log(err);
@@ -82,14 +82,14 @@ export const signin = asyncHandler(async (req, res, next) => {
     //       message: "Pending Agent Approval!",
     //       data: user._id,
     //     });
-    if (user.isSuspended)
-      return res
-        .status(400)
-        .send({
-          status: 400,
-          message: "Your account has been Suspended!",
-          username: String(user.email).toUpperCase(),
-        });
+    // if (user.isSuspended)
+    //   return res
+    //     .status(400)
+    //     .send({
+    //       status: 400,
+    //       message: "Your account has been Suspended!",
+    //       username: String(user.email).toUpperCase(),
+    //     });
 
     const validPassword = await bcrypt.compare(
       req.body.password,
@@ -99,14 +99,23 @@ export const signin = asyncHandler(async (req, res, next) => {
       return res
         .status(400)
         .send({ status: 400, message: "Invalid Credentials" });
+        const token = generateToken(user._id);
+        res.status(200).send({ ...user._doc, token })
+      .catch ((err) => {
+        console.log(err);
 
-    const token = generateToken(user._id);
-    res.status(200).send({ ...user._doc, token });
-  } catch (err) {
-    return res.status(400).json({
-      message: "Invalid Data",
-      c: 400,
-      d: { message: "Invalid Credentials" },
+  
+  if (user) {
+    res.status(201).json({
+      ...User._doc,
+      token: generateToken(User._id),
     });
+  } else {
+    res.status(400).send("Invalid user data");
+  };
+  } catch (err) {
+    console.log(err);
   }
-});
+})
+
+

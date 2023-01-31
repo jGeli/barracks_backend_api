@@ -50,7 +50,7 @@ const isEmail = (email) => {
   
     // if (isEmpty(data.phone)) errors.phone= 'Mobile must not be empty';
     if (isEmail(data.email));
-    if (isEmpty(data.password)) errors.password = 'Password must be empty';
+    if (isEmpty(data.password)) errors.password = 'Password must be not be empty';
     if (isPassword8(data.password)) errors.password = 'Password must be 8 characters';
     // if (isEmpty(data.refId)) errors.refId = 'Referrer ID is Required';
 
